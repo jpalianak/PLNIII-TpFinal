@@ -8,24 +8,57 @@ Este proyecto implementa un **sistema de agentes inteligentes** que interactúan
 
 ```
 .
-├── main.py                     # Punto de entrada principal
-├── main_kg_generator.py         # Generador de base de conocimiento (KB)
-├── .env                         # Variables de entorno
-├── config/                      # Archivos de configuración (sistema, agentes, tablas)
+├── main.py
+├── main_kg_generator.py
+├── README.md
+├── .env
+├── config/
+│   ├── agents.yaml
+│   ├── system.yaml
+│   └── tables.yaml
 ├── data/
-│   ├── db/                      # Base de datos SQLite fake
-│   └── scripts/                 # Generador de base de datos fake
-├── docs/                        # Diagramas y presentaciones
-├── logs/                        # Logs de ejecución
+│   ├── db/
+│   │   └── fake_db.sqlite
+│   └── scripts/
+│       └── fake_db_generator.py
+├── docs/
+│   └── Diagram.drawio
+├── logs/
+│   └── aige.log
 ├── src/
-│   ├── agents/                  # Agentes especializados
-│   ├── core/                    # Módulos base (DB, logging, utils)
-│   ├── knowledge/               # Generador y almacenamiento de conocimiento
-│   ├── workflows/               # Definición de grafos de ejecución
-│   └── __init__.py
-├── templates/                   # Prompts y plantillas para agentes
-├── tests/                       # Casos de prueba
-└── README.md
+│   ├── agents/
+│   │   ├── base_agent.py
+│   │   ├── customer_agent.py
+│   │   ├── execute_sql_agent.py
+│   │   ├── filter_check_agent.py
+│   │   ├── ... (otros agentes)
+│   ├── core/
+│   │   ├── database/
+│   │   │   └── local_db.py
+│   │   ├── logging/
+│   │   │   └── logger_config.py
+│   │   └── utils/
+│   │       ├── engine_loader.py
+│   │       ├── llm_loader.py
+│   │       ├── template_loader.py
+│   │       └── ... (otros utils)
+│   ├── knowledge/
+│   │   ├── kb_generator.py
+│   │   └── knowledge.json
+│   └── workflows/
+│       └── build_graph.py
+├── templates/
+│   ├── general/
+│   │   ├── column_extractor.yaml
+│   │   ├── knowledge.yaml
+│   │   ├── query_generation.yaml
+│   │   └── ... (otros templates)
+│   └── specific/
+│       ├── customer.yaml
+│       ├── orders.yaml
+│       └── product.yaml
+└── tests/
+
 ```
 
 ---

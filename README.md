@@ -57,7 +57,8 @@ Este proyecto implementa un **sistema de agentes inteligentes** que interactúan
 │       ├── customer.yaml
 │       ├── orders.yaml
 │       └── product.yaml
-└── tests/
+└── interfaces/
+│       └── streamlit(a realidar).py
 
 ```
 
@@ -66,7 +67,7 @@ Este proyecto implementa un **sistema de agentes inteligentes** que interactúan
 ## ⚙️ Requisitos
 
 * Python 3.10+
-* [LangChain](https://www.langchain.com/)
+* [LangChain / LangGraph](https://www.langchain.com/)
 * [SQLAlchemy](https://www.sqlalchemy.org/)
 * [Faker](https://faker.readthedocs.io/)
 * [PyYAML](https://pyyaml.org/)
@@ -80,28 +81,6 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Uso
-
-1. **Configurar variables de entorno** en `.env` (ejemplo: clave del modelo LLM, configuración de DB).
-2. **Generar la base fake**:
-
-```bash
-python data/scripts/fake_db_generator.py
-```
-
-3. **Ejecutar el sistema principal**:
-
-```bash
-python main.py
-```
-
-4. **Generar base de conocimiento (KB)**:
-
-```bash
-python main_kg_generator.py
-```
-
----
 
 ## 🛠️ Configuración
 
@@ -112,10 +91,32 @@ python main_kg_generator.py
 
 ---
 
+## ▶️ Uso
+
+1. **Configurar variables de entorno** en `.env` (ejemplo: clave del modelo LLM, configuración de DB).
+2. **Generar la base fake**:
+
+```bash
+python data/scripts/fake_db_generator.py
+```
+
+3. **Generar base de conocimiento (KB)**:
+
+```bash
+python main_kg_generator.py
+```
+
+4. **Ejecutar el sistema principal**:
+
+```bash
+python main.py
+```
+
+---
+
 ## 📖 Documentación
 
 * `docs/Diagram.drawio` → Diagrama de arquitectura.
-* `docs/Presentación-AIGE.pptx` → Presentación general del proyecto.
 
 ---
 
@@ -126,4 +127,4 @@ python main_kg_generator.py
 
 ---
 
-✍️ Autor: **Juan Pablo Alianak**
+✍️ Autores: **Jonathan Cagua y Juan Pablo Alianak**

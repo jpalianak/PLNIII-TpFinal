@@ -1,6 +1,6 @@
-# 🧠 AIGE – Sistema Multiagente con LLM
+# 🧠 Procesamiento Natural del Lenguaje – Sistema Multiagente con LLM
 
-Este proyecto implementa un **sistema de agentes inteligentes** que interactúan con un ERP simulado mediante una base de datos y generación de conocimiento. Se utilizan **LLMs**, **LangChain**, y una arquitectura de agentes especializados que cooperan para responder consultas en lenguaje natural.
+Este proyecto implementa un **sistema de agentes inteligentes** que interactúan con una base de datos SQlite. Se utilizan **LLMs**, **LangGraph**, **LangChain**, y una arquitectura de agentes especializados que cooperan para responder consultas en lenguaje natural.
 
 ---
 

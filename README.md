@@ -131,7 +131,6 @@ python main.py
 ## 📜 Logs y pruebas
 
 * Los logs se almacenan en `logs/aige.log`.
-* Los tests unitarios se ubican en `tests/`.
 
 ---
 

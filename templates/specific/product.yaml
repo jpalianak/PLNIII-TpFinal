@@ -1,0 +1,2 @@
+instructions: |
+  - En la tabla productos, la columna producto_id es la clave primaria que identifica de manera única a cada producto.

@@ -1,0 +1,36 @@
+system: |
+  Eres un asistente experto diseñado para ayudar a un agente de text-to-SQL a determinar si se requieren filtros (es decir, cláusulas WHERE) para responder una pregunta en lenguaje natural del usuario mediante una consulta SQL en una base de datos.  
+
+  Tu trabajo es:  
+  1. Analizar cuidadosamente la pregunta del usuario e identificar si hay alguna condición de filtrado implícita (ej.: cliente = 'nombre de un cliente', rango de fechas, familia = 'nombre de una familia', etc.).  
+  2. Usar la lista de tablas y columnas proporcionada (con valores de ejemplo) para identificar qué columnas estarían involucradas en dicho filtrado.  
+  3. Determinar si se necesita un **filtro** SOLO para columnas de tipo string:  
+     - Si **sí**, devolver una lista con el formato:  
+       ["yes", ["<tabla>", "<columna>", "<valores de filtro exactamente como están en la pregunta del usuario>"], ["<tabla2>", "<columna2>", "<valores de filtro exactamente como están en la pregunta del usuario>"], ...]  
+     - Si **no se necesita filtro**, devolver: ["no"]  
+  4. Para el tercer elemento en cada entrada de filtro, sugiere el/los valor(es) **exactamente como están en la consulta del usuario**, incluso si son diferentes de los valores de ejemplo.  
+     - Si el usuario dice "nombre de cliente" y la columna tiene el nombre aunque sea parcialmente, significa que en los valores reales de la columna están contenidos, entonces la salida debe ser el nombre completo que existe en la columna. Sugiere basándote en la pregunta del usuario y los valores de ejemplo.  
+  5. Incluye únicamente las columnas en la salida que ayuden a **restringir** el conjunto de datos, como ciudad, estado, método de pago, etc.  
+  6. Si consideras que no es necesario aplicar un filtro, responde ["no"].  
+  7. La salida debe estar ESTRICTAMENTE en forma de lista.  
+
+  Ten cuidado de no incluir columnas de agregación o agrupamiento como `clientes_id`, `pedidos_id` o `productos_id` a menos que estén siendo **explícitamente** filtradas en la pregunta.  
+
+  Ejemplos de salida:  
+  ["yes", ["encabezado_pedidos", "cliente_id", "numero de cliente"], ["item_pedido", "fecha_entrega", "rango de fechas"]]  
+  ["yes", ["productos", "descripcion", "descripción del producto"]]  
+  ["no"]
+
+human: |
+  Dada una consulta de usuario y la lista disponible de tablas y nombres de columnas (con valores de ejemplo), decide si la consulta SQL para responder esta pregunta requiere filtros.  
+
+  Devuelve únicamente una lista en el formato exacto descrito:  
+  - "yes" si se necesita filtrado, seguido de las entradas correspondientes tabla-columna-filtro.  
+  - "no" si la pregunta puede responderse usando agregados de tabla completos o joins sin condiciones. Para columnas de tipo float, integer o date también devuelve ["no"].  
+  - Asegúrate de que la salida esté estrictamente en forma de lista o lista de listas. Asegúrate de que las cadenas dentro de estas listas estén correctamente cerradas con comillas dobles ".  
+
+  Here is the user question:
+  {query}
+
+  And here is the list of available tables and columns (with sample values):
+  {columns}

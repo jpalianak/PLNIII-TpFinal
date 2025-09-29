@@ -1,0 +1,250 @@
+{
+  "productos": {
+    "table_description": "Contiene el id del producto, la descripción, el tipo y la familia del producto.",
+    "columns": [
+      {
+        "name": "producto_id",
+        "datatype": "VARCHAR(20)",
+        "description": "Identificador único del producto en la tabla de productos. Esta tabla contiene el id del producto, la descripción, el tipo y la familia.",
+        "sample_values": [
+          "000045",
+          "000009",
+          "000085",
+          "000008",
+          "000063"
+        ]
+      },
+      {
+        "name": "descripcion",
+        "datatype": "VARCHAR(255)",
+        "description": "Descripción textual del producto tal como aparece en la tabla de productos, que contiene el id del producto, la descripción, el tipo y la familia.",
+        "sample_values": [
+          "North white agency unit.",
+          "Dark guess alone forget themselves.",
+          "Catch lose.",
+          "Official how.",
+          "Foreign itself yard."
+        ]
+      },
+      {
+        "name": "tipo",
+        "datatype": "VARCHAR(50)",
+        "description": "Categoría o tipo del producto según la clasificación de la tabla de productos, que contiene el id del producto, la descripción, el tipo y la familia.",
+        "sample_values": [
+          "tonight",
+          "firm",
+          "network",
+          "offer",
+          "company"
+        ]
+      },
+      {
+        "name": "familia",
+        "datatype": "VARCHAR(50)",
+        "description": "Familia o grupo al que pertenece el producto, según la clasificación de la tabla de productos que incluye el id, la descripción, el tipo y la familia.",
+        "sample_values": [
+          "I",
+          "contain",
+          "dog",
+          "decision",
+          "who"
+        ]
+      }
+    ]
+  },
+  "encabezado_pedidos": {
+    "table_description": "Tabla de pedidos de venta. Registra encabezados de pedido de venta con identificadores, cliente, vendedor, fecha de emisión, unidad de negocio y tasa de moneda. Un pedido puede contener múltiples ítems y cada ítem puede ser cubierto por un vendedor distinto; cada fila representa un pedido único asociado a un cliente, con un vendedor y atributos de fecha de emisión, unidad de negocio y tasa de moneda.",
+    "columns": [
+      {
+        "name": "pedido_id",
+        "datatype": "VARCHAR(20)",
+        "description": "Identificador único del pedido de venta (formato con ceros a la izquierda).",
+        "sample_values": [
+          "000156",
+          "000093",
+          "000127",
+          "000080",
+          "000172"
+        ]
+      },
+      {
+        "name": "cliente_id",
+        "datatype": "VARCHAR(20)",
+        "description": "Identificador del cliente asociado al pedido.",
+        "sample_values": [
+          "000037",
+          "000035",
+          "000026",
+          "000027",
+          "000003"
+        ]
+      },
+      {
+        "name": "vendedor_id",
+        "datatype": "VARCHAR(10)",
+        "description": "Identificador del vendedor asignado al pedido.",
+        "sample_values": [
+          "171",
+          "534",
+          "458",
+          "334",
+          "663"
+        ]
+      },
+      {
+        "name": "fecha_emision",
+        "datatype": "VARCHAR(8)",
+        "description": "Fecha de emisión del pedido en formato AAAAMMDD.",
+        "sample_values": [
+          "20250405",
+          "20250220",
+          "20250407",
+          "20250818",
+          "20250918"
+        ]
+      },
+      {
+        "name": "unidad_negocio",
+        "datatype": "VARCHAR(10)",
+        "description": "Unidad de negocio a la que pertenece el pedido (ej., INT para interna, NAC para nacional).",
+        "sample_values": [
+          "INT",
+          "INT",
+          "INT",
+          "NAC",
+          "NAC"
+        ]
+      },
+      {
+        "name": "tasa_moneda",
+        "datatype": "DECIMAL(12,2)",
+        "description": "Tasa de moneda aplicada al pedido.",
+        "sample_values": [
+          "692.66",
+          "472.49",
+          "21.02",
+          "216.51",
+          "715.1"
+        ]
+      }
+    ]
+  },
+  "items_pedidos": {
+    "table_description": "Tabla de detalle de artículos de pedido de venta. Cada fila representa una línea de artículo asociada a un pedido de venta y se vincula con la cabecera del pedido (encabezado_pedidos) a través de pedido_id. Contiene el identificador del pedido, el número de ítem dentro del pedido, el identificador del producto, la cantidad vendida, la descripción del producto (derivada del producto_id), el precio de venta unitario, el valor total de la línea y la fecha estimada de entrega.",
+    "columns": [
+      {
+        "name": "pedido_id",
+        "datatype": "VARCHAR(20)",
+        "description": "Identificador del pedido al que pertenece esta línea; clave foránea que relaciona con la cabecera de pedidos (encabezado_pedidos).",
+        "sample_values": [
+          "000122",
+          "000013",
+          "000077",
+          "000011",
+          "000073"
+        ]
+      },
+      {
+        "name": "item_numero",
+        "datatype": "VARCHAR(20)",
+        "description": "Número de ítem dentro del pedido que identifica de manera única la línea de artículo para ese pedido (combinación única con pedido_id).",
+        "sample_values": [
+          "000481",
+          "000011",
+          "000463",
+          "000073",
+          "000449"
+        ]
+      },
+      {
+        "name": "producto_id",
+        "datatype": "VARCHAR(20)",
+        "description": "Identificador del producto vendido; referencia al catálogo de productos. La descripción textual del producto puede obtenerse a partir de este id.",
+        "sample_values": [
+          "000055",
+          "000030",
+          "000078",
+          "000017",
+          "000047"
+        ]
+      },
+      {
+        "name": "cantidad_vendida",
+        "datatype": "INT",
+        "description": "Cantidad vendida de ese producto en la línea del pedido.",
+        "sample_values": [
+          "34",
+          "14",
+          "28",
+          "35",
+          "42"
+        ]
+      },
+      {
+        "name": "precio_venta",
+        "datatype": "DECIMAL(10,2)",
+        "description": "Precio de venta unitario acordado para esa línea de pedido.",
+        "sample_values": [
+          "238.42",
+          "444.61",
+          "511.91",
+          "261.57",
+          "712.70"
+        ]
+      },
+      {
+        "name": "valor_total",
+        "datatype": "DECIMAL(12,2)",
+        "description": "Valor total de la línea de pedido (cantidad_vendida multiplicada por precio_venta).",
+        "sample_values": [
+          "935.18",
+          "232.20",
+          "853.72",
+          "133.68",
+          "114.98"
+        ]
+      },
+      {
+        "name": "fecha_entrega",
+        "datatype": "VARCHAR(8)",
+        "description": "Fecha de entrega estimada para esta línea de pedido, expresada en formato AAAAMMDD (cadena).",
+        "sample_values": [
+          "20250221",
+          "20250410",
+          "20250118",
+          "20250526",
+          "20250212"
+        ]
+      }
+    ]
+  },
+  "clientes": {
+    "table_description": "Contiene la lista de clientes, incluyendo el id del cliente y el nombre del cliente. Tabla de clientes, cuyo identificador único es cliente_id y el nombre asociado es nombre.",
+    "columns": [
+      {
+        "name": "cliente_id",
+        "datatype": "VARCHAR(6)",
+        "description": "Identificador único del cliente en la lista de clientes; sirve como clave para identificar de forma inequívoca al cliente dentro de la tabla y se utiliza como referencia en otros procesos (pedidos, facturación, etc.).",
+        "sample_values": [
+          "000028",
+          "000032",
+          "000009",
+          "000049",
+          "000007"
+        ]
+      },
+      {
+        "name": "nombre",
+        "datatype": "VARCHAR(100)",
+        "description": "Nombre del cliente asociado al cliente_id en la lista de clientes; se utiliza para mostrar al cliente en interfaces de ventas y reportes.",
+        "sample_values": [
+          "Corey Cook",
+          "Laura Lee",
+          "Phillip Green",
+          "Sara Vincent",
+          "Brooke Martinez"
+        ]
+      }
+    ]
+  }
+}

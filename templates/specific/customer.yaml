@@ -1,0 +1,2 @@
+instructions: |
+  - En la tabla clientes, la columna cliente_id es la clave primaria que identifica de manera única a cada cliente.

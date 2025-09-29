@@ -1,0 +1,43 @@
+agents:
+  router:
+    domain: general
+    template_file: router
+
+  order:
+    domain: specific
+    template_file: order
+    table_list:
+      - encabezado_pedidos
+      - items_pedidos
+
+  product:
+    domain: specific
+    template_file: product
+    table_list:
+      - productos
+
+  customer:
+    domain: specific
+    template_file: customer
+    table_list:
+      - clientes
+  
+  filter_check:
+    domain: general
+    template_file: filter_check
+    input_from:
+      - order
+      - customer
+      - product
+  
+  query_generation:
+    domain: general
+    template_file: query_generation
+
+  query_validation:
+    domain: general
+    template_file: query_validation
+
+  final_response:
+    domain: general
+    template_file: final_response

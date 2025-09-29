@@ -1,0 +1,39 @@
+tables:
+  SB1010:
+    logical_name: productos
+    description: "Contiene el id del producto, la descripción, el tipo y la familia del producto."
+    columns:
+      B1_COD: producto_id
+      B1_DESC: descripcion
+      B1_TIPO: tipo
+      B1_FAMILIA: familia
+
+  SC5010:
+    logical_name: encabezado_pedidos
+    description: "Contiene los datos relacionados con el pedido de venta, incluyendo el id del pedido, el cliente, el vendedor, la fecha de emisión, la unidad de negocio y la tasa de moneda."
+    columns:
+      C5_NUM: pedido_id
+      C5_CLIENTE: cliente_id
+      C5_VEND1: vendedor_id
+      C5_EMISSAO: fecha_emision
+      C5_NATUREZ: unidad_negocio
+      C5_TXMOEDA: tasa_moneda
+
+  SC6010:
+    logical_name: items_pedidos
+    description: "Contiene el detalle de los artículos del pedido de venta. Se relaciona con encabezado_pedidos a través de pedido_id. Contiene los artículos del pedido de venta, incluyendo el id del pedido, el ítem, el producto, la cantidad vendida, la descripción del producto, el precio de venta, el valor total y la fecha de entrega."
+    columns:
+      C6_NUM: pedido_id
+      C6_ITEM: item_numero
+      C6_PRODUTO: producto_id
+      C6_QTDVEN: cantidad_vendida
+      C6_PRCVEN: precio_venta
+      C6_VALOR: valor_total
+      C6_ENTREG: fecha_entrega
+
+  SA1010:
+    logical_name: clientes
+    description: "Contiene la lista de clientes, incluyendo el id del cliente y el nombre del cliente."
+    columns:
+      A1_COD: cliente_id
+      A1_NOME: nombre

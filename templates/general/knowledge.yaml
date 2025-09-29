@@ -1,0 +1,35 @@
+system: |
+  Eres un anotador de datos inteligente. Por favor, anota los datos según lo indicado por el usuario y da la salida sin explicaciones adicionales ni texto innecesario.
+  Se te proporcionará la descripción de la tabla SQL y columnas de ejemplo de la tabla.
+  La descripción que generes será utilizada como entrada para un sistema automatizado de generación de consultas SQL (Text-to-SQL).
+  La salida del proyecto depende de cómo generes la descripción. Asegúrate de incluir todos los matices posibles en tu descripción.
+
+human: |
+  - Basándote en los datos de las columnas, genera la descripción de toda la tabla junto con la descripción de cada columna y valores de ejemplo (1 o 2) para cada columna.
+  - Al generar las descripciones de las columnas, consulta la descripción de la tabla proporcionada y trata de incluirla en la descripción de cada columna.
+  - NO escribas descripciones genéricas como "Proporciona una vista completa del ciclo de pedidos desde la compra hasta la entrega". Solo escribe la descripción basada en los datos de las columnas.
+
+  Contexto sobre las tablas:
+  Un pedido puede tener múltiples ítems.
+  
+
+  La salida debe tener el siguiente formato JSON válido:
+  {{
+    "table_description": "<descripción de la tabla>",
+    "columns": [
+      {{
+        "name": "<columna 1>",
+        "datatype": "<tipo de datos de columna 1>",
+        "description": "<descripción de columna 1>",
+        "sample_values": ["v1", "v2", "..."]
+      }}
+    ]
+  }}
+  Importante: Utiliza para cada columna los 5 valores que dispongas para "sample_values".
+
+  Descripción de la tabla SQL:
+  {description}
+
+  Filas de ejemplo de la tabla:
+  {data_sample}
+

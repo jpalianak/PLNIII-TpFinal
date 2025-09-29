@@ -1,0 +1,11 @@
+# Tipo de conexion del sistema: local o en la nube
+system:
+  connection_type: local   # opciones: local / cloud
+
+# Ubicación de la base de datos local
+local_database:
+  path: "data/db/fake_db.sqlite"
+
+# Ubicación de la base de conocimiento
+knowledge_base:
+  path: "src/knowledge/knowledge.json"

@@ -1,6 +1,6 @@
 # 🧠 Procesamiento Natural del Lenguaje – Sistema Multiagente con LLM
 
-Este proyecto implementa un **sistema de agentes inteligentes** que interactúan con lenguaje natural con una base de datos SQlite. Se utilizan **LLMs**, **LangGraph**, **LangChain**, y una arquitectura de agentes especializados que cooperan para responder consultas.
+Este proyecto implementa un **sistema de agentes inteligentes** que interactúan en lenguaje natural con una base de datos SQlite. Se utilizan **LLMs**, **LangGraph**, **LangChain**, y una arquitectura de agentes especializados que cooperan para responder consultas.
 
 ---
 

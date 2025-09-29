@@ -1,6 +1,6 @@
 # 🧠 Procesamiento Natural del Lenguaje – Sistema Multiagente con LLM
 
-Este proyecto implementa un **sistema de agentes inteligentes** que interactúan con una base de datos SQlite. Se utilizan **LLMs**, **LangGraph**, **LangChain**, y una arquitectura de agentes especializados que cooperan para responder consultas en lenguaje natural.
+Este proyecto implementa un **sistema de agentes inteligentes** que interactúan con lenguaje natural con una base de datos SQlite. Se utilizan **LLMs**, **LangGraph**, **LangChain**, y una arquitectura de agentes especializados que cooperan para responder consultas.
 
 ---
 
@@ -9,7 +9,8 @@ Este proyecto implementa un **sistema de agentes inteligentes** que interactúan
 ```
 .
 ├── main.py
-├── main_kg_generator.py
+├── main_kl_generator.py
+├── main_streamlit.py
 ├── README.md
 ├── .env
 ├── config/
@@ -58,7 +59,7 @@ Este proyecto implementa un **sistema de agentes inteligentes** que interactúan
 │       ├── orders.yaml
 │       └── product.yaml
 └── interfaces/
-│       └── streamlit(a realidar).py
+        └── streamlit_app.py
 
 ```
 
@@ -91,6 +92,13 @@ pip install -r requirements.txt
 
 ---
 
+🏗️ Arquitectura del sistema
+
+La siguiente figura muestra la arquitectura multiagente implementada:
+
+![Arquitectura del sistema](docs/Diagram.png)
+---
+
 ## ▶️ Uso
 
 1. **Configurar variables de entorno** en `.env` (ejemplo: clave del modelo LLM, configuración de DB).
@@ -103,7 +111,7 @@ python data/scripts/fake_db_generator.py
 3. **Generar base de conocimiento (KB)**:
 
 ```bash
-python main_kg_generator.py
+python main_kl_generator.py
 ```
 
 4. **Ejecutar el sistema principal**:

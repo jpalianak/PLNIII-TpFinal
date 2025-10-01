@@ -20,7 +20,7 @@ class FilterCheckAgent(BaseAgent):
 
     def run(self, state: Dict) -> Dict:
         self.current_agent.set(self.name)
-        print("filter_check_agent State: ", state)
+
         f = {}
         for agent in self.input_from:
             key = f"{agent}_out"

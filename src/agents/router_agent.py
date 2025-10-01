@@ -16,7 +16,6 @@ class RouterAgent(BaseAgent):
         )
 
     def run(self, state: Dict) -> Dict:
-        #self.current_agent.set(self.name)
         
         response = self.run_chain({"question": state["user_query"]}).replace('```', '')
 

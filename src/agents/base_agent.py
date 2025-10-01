@@ -16,7 +16,7 @@ class BaseAgent:
         self.console_logger = console_logger
         self.file_logger = file_logger
 
-    def run_chain(self, input_dict: Dict, chain=None) -> str:
+    def run_chain(self, input_dict: Dict, chain=None, token_logger=None) -> str:
         """
         Ejecuta el chain de LangChain/LangGraph si el agente lo necesita.
         Devuelve un string (la salida del parser).
@@ -38,7 +38,9 @@ class BaseAgent:
         self.current_agent.set(self.name)
         start_time = time.time()
         
-        output = chain.invoke(input_dict, config={"callbacks": [self.token_logger]})
+        used_logger = token_logger or self.token_logger
+        
+        output = chain.invoke(input_dict, config={"callbacks": [used_logger]})
         
         end_time = time.time()
         elapsed = end_time - start_time

@@ -1,6 +1,8 @@
+import re
+import time
 import streamlit as st
 from src.workflows.build_graph import build_main_graph
-from src.core.logging.logger_config import log_queue 
+from src.core.logging.logger_config import log_queue
 
 graph = build_main_graph()
 
@@ -24,7 +26,6 @@ def run_app():
         run_button = st.button("Ejecutar consulta", key="run_button")
         st.markdown("<br><br>", unsafe_allow_html=True)
         result_placeholder = st.empty()
-        # Creamos el placeholder de resultado final UNA sola vez
         result_placeholder.text_area(
             "Respuesta final",
             value="",
@@ -36,7 +37,6 @@ def run_app():
     # -------- Columna derecha: Logs --------
     with col_right:
         logs_placeholder = st.empty()
-        # Creamos el placeholder de logs UNA sola vez
         logs_placeholder.text_area(
             "Logs de agentes",
             value="",
@@ -47,16 +47,39 @@ def run_app():
 
     status_placeholder = st.empty()
     
-    # -------- Ejecutar grafo --------
     if run_button and user_query.strip():
         status_placeholder.info("⏳ Procesando...")
         all_logs = []
+
+        # Expresiones regulares para parsear tokens
+        prompt_pattern = re.compile(r"prompt=(\d+)")
+        completion_pattern = re.compile(r"completion=(\d+)")
+        total_pattern = re.compile(r"total=(\d+)")
+
+        # Variables acumuladas
+        prompt_total = 0
+        completion_total = 0
+        total_tokens = 0
+
+        start_time = time.time()
 
         for chunk in graph.stream({"user_query": user_query}):
 
             while not log_queue.empty():
                 msg = log_queue.get()
                 all_logs.append(msg)
+
+                # --- Parsear tokens ---
+                m_prompt = prompt_pattern.search(msg)
+                m_completion = completion_pattern.search(msg)
+                m_total = total_pattern.search(msg)
+
+                if m_prompt:
+                    prompt_total += int(m_prompt.group(1))
+                if m_completion:
+                    completion_total += int(m_completion.group(1))
+                if m_total:
+                    total_tokens += int(m_total.group(1))
 
                 logs_placeholder.text_area(
                     "Logs de agentes",
@@ -65,13 +88,12 @@ def run_app():
                     disabled=False
                 )
 
+            # Mostrar respuesta final
             final_resp = None
             if isinstance(chunk, dict):
-                # Chequeamos si existe 'final_response_out' directamente
                 if "final_response_out" in chunk and chunk["final_response_out"] is not None:
                     final_resp = chunk["final_response_out"]
                 else:
-                    # También dentro de agentes del chunk
                     for agent_data in chunk.values():
                         if isinstance(agent_data, dict) and "final_response_out" in agent_data:
                             final_resp = agent_data["final_response_out"]
@@ -85,8 +107,13 @@ def run_app():
                     disabled=False
                 )
 
-        status_placeholder.success("✅ Consulta completada")
+        # Tiempo real total
+        elapsed_total = time.time() - start_time
+
+        status_placeholder.success(
+            f"✅ Consulta completada en {elapsed_total:.2f}s | "
+            f"Prompt tokens: {prompt_total}, Completion tokens: {completion_total}, Total tokens: {total_tokens}"
+        )
 
 if __name__ == "__main__":
     run_app()
-

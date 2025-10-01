@@ -33,8 +33,9 @@ if not file_logger.handlers:
 class EnhancedTokenLogger(BaseCallbackHandler):
     """Callback que registra tokens, tiempo y tamaño de input/output en el log de archivo."""
 
-    def __init__(self):
+    def __init__(self, accumulate=True):
         super().__init__()
+        self.accumulate = accumulate  # Si True, acumula tokens en múltiples llamadas
         self.prompt_tokens = 0
         self.completion_tokens = 0
         self.total_tokens = 0
@@ -46,36 +47,46 @@ class EnhancedTokenLogger(BaseCallbackHandler):
         """Se llama antes de enviar el prompt al LLM."""
         self.start_time = time.time()
         # medir longitud del prompt enviado
+        prompt_len = 0
         if isinstance(prompts, list):
-            self.input_chars = sum(len(p) for p in prompts)
+            prompt_len = sum(len(p) for p in prompts)
         elif isinstance(prompts, str):
-            self.input_chars = len(prompts)
+            prompt_len = len(prompts)
+        if self.accumulate:
+            self.input_chars += prompt_len
         else:
-            self.input_chars = 0
+            self.input_chars = prompt_len
 
     def on_llm_end(self, response, **kwargs):
         """Se llama al recibir la respuesta del LLM."""
         usage = response.llm_output.get("token_usage", {})
-        self.prompt_tokens = usage.get("prompt_tokens", 0)
-        self.completion_tokens = usage.get("completion_tokens", 0)
-        self.total_tokens = usage.get("total_tokens", 0)
+        if self.accumulate:
+            self.prompt_tokens += usage.get("prompt_tokens", 0)
+            self.completion_tokens += usage.get("completion_tokens", 0)
+            self.total_tokens += usage.get("total_tokens", 0)
+        else:
+            self.prompt_tokens = usage.get("prompt_tokens", 0)
+            self.completion_tokens = usage.get("completion_tokens", 0)
+            self.total_tokens = usage.get("total_tokens", 0)
 
         # medir longitud de la respuesta
+        output_len = 0
         if hasattr(response, "generations") and response.generations:
             outputs = [gen[0].text for gen in response.generations if gen]
-            self.output_chars = sum(len(o) for o in outputs)
+            output_len = sum(len(o) for o in outputs)
+        if self.accumulate:
+            self.output_chars += output_len
         else:
-            self.output_chars = 0
+            self.output_chars = output_len
 
         elapsed = time.time() - self.start_time if self.start_time else 0
-
         agent_name = current_agent.get()
         file_logger.info(
             f"tokens - [{agent_name}] prompt={self.prompt_tokens}, "
             f"completion={self.completion_tokens}, total={self.total_tokens} | "
             f"elapsed={elapsed:.2f}s | in_chars={self.input_chars}, out_chars={self.output_chars}"
         )
-
+            
 # ------------------ Cola de logs para Streamlit ------------------
 log_queue = queue.Queue()
 

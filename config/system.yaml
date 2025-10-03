@@ -1,6 +1,7 @@
 # Tipo de conexion del sistema: local o en la nube
 system:
   connection_type: local   # opciones: local / cloud
+  notification_channel: "slack"  # opciones: email / slack / telegram / none
 
 # Ubicación de la base de datos local
 local_database:

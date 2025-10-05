@@ -1,4 +1,4 @@
-🧠 Procesamiento Natural del Lenguaje – Sistema Multiagente con LLM
+# 🧠  Procesamiento Natural del Lenguaje – Sistema Multiagente con LLM
 
 Este proyecto implementa un **sistema de agentes inteligentes** que interactúan en lenguaje natural con una base de datos SQLite. Se utilizan **LLMs**, **LangGraph**, **LangChain**, y una arquitectura de agentes especializados que cooperan para responder consultas. Además, el sistema puede **notificar los resultados** a través de múltiples canales: email, Slack o Telegram.
 

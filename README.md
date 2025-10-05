@@ -1,6 +1,6 @@
-# 🧠 Procesamiento Natural del Lenguaje – Sistema Multiagente con LLM
+🧠 Procesamiento Natural del Lenguaje – Sistema Multiagente con LLM
 
-Este proyecto implementa un **sistema de agentes inteligentes** que interactúan en lenguaje natural con una base de datos SQlite. Se utilizan **LLMs**, **LangGraph**, **LangChain**, y una arquitectura de agentes especializados que cooperan para responder consultas.
+Este proyecto implementa un **sistema de agentes inteligentes** que interactúan en lenguaje natural con una base de datos SQLite. Se utilizan **LLMs**, **LangGraph**, **LangChain**, y una arquitectura de agentes especializados que cooperan para responder consultas. Además, el sistema puede **notificar los resultados** a través de múltiples canales: email, Slack o Telegram.
 
 ---
 
@@ -46,6 +46,10 @@ Este proyecto implementa un **sistema de agentes inteligentes** que interactúan
 │   ├── knowledge/
 │   │   ├── kb_generator.py
 │   │   └── knowledge.json
+│   ├── notifications/
+│   │   ├── email_notifier.py
+│   │   ├── slack_notifier.py
+│   │   └── telegram_notifier.py
 │   └── workflows/
 │       └── build_graph.py
 ├── templates/
@@ -88,7 +92,7 @@ pip install -r requirements.txt
 * `config/tables.yaml` → Define las tablas, nombres lógicos y columnas.
 * `config/agents.yaml` → Define los agentes y su comportamiento.
 * `config/system.yaml` → Configuración global del sistema.
-* `.env` → Key del proveedor del llm.
+* `.env` → Contiene las credenciales de LLM, correo, Slack y Telegram:
 
 ---
 
@@ -114,10 +118,16 @@ python data/scripts/fake_db_generator.py
 python main_kl_generator.py
 ```
 
-4. **Ejecutar el sistema principal**:
+4. **Ejecutar el sistema principal en terminal**:
 
 ```bash
 python main.py
+```
+
+5. **Ejecutar el sistema principal con streamlit**:
+
+```bash
+streamlit run main_streamlit.py
 ```
 
 ---
@@ -125,6 +135,12 @@ python main.py
 ## 📖 Documentación
 
 * `docs/Diagram.drawio` → Diagrama de arquitectura.
+
+---
+
+## 🔄 Flujo de notificaciones
+
+El agente final combina **el canal de notificación configurado por defecto en system.yaml** con **los canales mencionados explícitamente por el usuario**: Email, Slack o Telegram. Si el usuario menciona un canal en su consulta, la notificación **se suma al canal configurado**. Los mensajes incluyen siempre una introducción automática del sistema de agentes.
 
 ---
 

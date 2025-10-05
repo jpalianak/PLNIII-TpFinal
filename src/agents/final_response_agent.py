@@ -35,7 +35,8 @@ class FinalResponseAgent(BaseAgent):
         self.channel_tools = {
             "email": notify_email,
             "slack": notify_slack,
-            "telegram": notify_telegram
+            "telegram": notify_telegram,
+            "none": None
         }
 
     def run(self, state: Dict) -> Dict:
@@ -50,18 +51,28 @@ class FinalResponseAgent(BaseAgent):
         })
         state[f"{self.name}_out"] = response
 
-        # ---- Notificación según configuración ----
-        tool_to_use = self.channel_tools.get(self.notification_channel)
-        if tool_to_use and self.notification_channel != "none":
-            # Definir destinatario y mensaje
+        # --- Detectar canales mencionados por el usuario ---
+        user_query_lower = state["user_query"].lower()
+        user_channels = [c for c in ["email", "slack", "telegram"] if c in user_query_lower]
 
-            message = f"Este mensaje fue generado automáticamente por el sistema de agentes AIGE.\n\nAquí está el resultado de tu consulta:\n\n{response}"
-            
-            # Llamar a la tool
-            try:
-                result = tool_to_use.invoke(f"{recipient}|{message}")
-                print(f"[NOTIFICACIÓN] Canal: {self.notification_channel} -> {result}")
-            except Exception as e:
-                print(f"[ERROR NOTIFICACIÓN] Canal: {self.notification_channel} -> {e}")
+        # --- Agregar canal por defecto del sistema ---
+        channels_to_use = set(user_channels)
+        if self.notification_channel != "none":
+            channels_to_use.add(self.notification_channel)
+
+        message = (
+            f"Este mensaje fue generado automáticamente por el sistema de agentes AIGE.\n\n"
+            f"Aquí está el resultado de tu consulta:\n\n{response}"
+        )
+
+        # --- Enviar notificación a todos los canales detectados ---
+        for channel in channels_to_use:
+            tool_to_use = self.channel_tools.get(channel)
+            if tool_to_use is not None:
+                try:
+                    result = tool_to_use.invoke(f"{recipient}|{message}")
+                    print(f"[NOTIFICACIÓN] Canal: {channel} -> {result}")
+                except Exception as e:
+                    print(f"[ERROR NOTIFICACIÓN] Canal: {channel} -> {e}")
 
         return state

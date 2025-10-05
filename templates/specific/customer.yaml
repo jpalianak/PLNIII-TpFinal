@@ -1,2 +1,5 @@
 instructions: |
-  - En la tabla clientes, la columna cliente_id es la clave primaria que identifica de manera única a cada cliente.
+  - Cuando el usuario pregunta por el nombre de un cliente, debes utilizar esta tabla.
+  - La tabla clientes contiene información sobre los clientes, incluyendo su identificación y su nombre.
+  - Utiliza esta tabla para responder preguntas relacionadas con los clientes, por ejemplo su nombre.
+  - En la salida inclui siempre el id del cliente + el nombre del cliente.

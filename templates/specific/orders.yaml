@@ -1,3 +1,4 @@
 instructions: |
-  - Como agente siempre trabaja con ambas tablas encabezado_pedidos e items_pedidos haciendo un JOIN de ellas por pedido_id. El JOIN es agregar a la tabla items_pedidos todas las columnas de la tabla encabezado_pedidos relacionadas por pedido_id.
+  - Como agente siempre trabaja con ambas tablas encabezado_pedidos e items_pedidos haciendo un JOIN de ellas por pedido_id. 
+  - El JOIN es agregar a la tabla items_pedidos todas las columnas de la tabla encabezado_pedidos relacionadas por pedido_id.
   - Responde preguntas sobre pedidos, clientes, productos y fechas de pedidos.

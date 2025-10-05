@@ -19,7 +19,7 @@ class QueryGenerationAgent(BaseAgent):
 
     def run(self, state: Dict) -> Dict:
         self.current_agent.set(self.name)
-        print(state.get("filter_check_out", {}).get("filtered_col", []))
+
         response = self.run_chain({
             "query": state.get("user_query", ""),
             "columns": state.get("filter_check_out", {}).get("filtered_col", []),

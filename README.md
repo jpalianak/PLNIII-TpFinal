@@ -88,7 +88,7 @@ pip install -r requirements.txt
 * `config/tables.yaml` → Define las tablas, nombres lógicos y columnas.
 * `config/agents.yaml` → Define los agentes y su comportamiento.
 * `config/system.yaml` → Configuración global del sistema.
-* `.env` → Claves y parámetros sensibles.
+* `.env` → Key del proveedor del llm.
 
 ---
 

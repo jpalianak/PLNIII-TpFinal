@@ -38,6 +38,10 @@ Además, el sistema puede notificar resultados a través de múltiples canales: 
 │   ├── core/
 │   │   ├── database/
 │   │   │   └── local_db.py
+│   │   └── guardrails/
+│   │   │   ├── base_guard.py
+│   │   │   ├── input_guard.py
+│   │   │   └── output_guard.py
 │   │   ├── logging/
 │   │   │   └── logger_config.py
 │   │   └── utils/

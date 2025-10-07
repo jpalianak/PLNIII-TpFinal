@@ -21,6 +21,8 @@ if not console_logger.handlers:
     console_handler.setFormatter(console_formatter)
     console_logger.addHandler(console_handler)
 
+console_logger.propagate = False
+
 # Logger archivo
 file_logger = logging.getLogger("aige_file")
 file_logger.setLevel(logging.INFO)
@@ -29,6 +31,8 @@ if not file_logger.handlers:
     file_formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
     file_handler.setFormatter(file_formatter)
     file_logger.addHandler(file_handler)
+    
+file_logger.propagate = False
 
 class EnhancedTokenLogger(BaseCallbackHandler):
     """Callback que registra tokens, tiempo y tamaño de input/output en el log de archivo."""
@@ -103,3 +107,7 @@ class StreamlitQueueHandler(logging.Handler):
 streamlit_handler = StreamlitQueueHandler()
 streamlit_handler.setFormatter(logging.Formatter("%(message)s"))
 console_logger.addHandler(streamlit_handler)
+
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("guardrails").setLevel(logging.WARNING)
+logging.getLogger("langgraph").setLevel(logging.WARNING)

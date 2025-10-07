@@ -6,11 +6,10 @@ from src.core.utils.config_system_loader import load_system_config
 from src.notifications.email_notifier import notify_email
 from src.notifications.slack_notifier import notify_slack
 from src.notifications.telegram_notifier import notify_telegram
+from src.core.guardrails.output_guard import OutputGuard
 from dotenv import load_dotenv
 import os
 import logging
-from guardrails import Guard, OnFailAction
-from guardrails.hub import RegexMatch
 
 load_dotenv()
 
@@ -32,7 +31,8 @@ class FinalResponseAgent(BaseAgent):
         )
         self.engine = engine  
 
-        # Configurar canal de notificación
+        self.output_guard = OutputGuard()
+        
         self.notification_channel = agents_system.get("notification_channel", "none").lower()
 
         self.channel_tools = {
@@ -41,52 +41,6 @@ class FinalResponseAgent(BaseAgent):
             "telegram": notify_telegram,
             "none": None
         }
-
-    def _validate_output(self, response: str) -> str:
-        """
-        Valida y limpia texto de salida del modelo con Guardrails.
-        - Rechaza bloques markdown (```) o etiquetas de rol (System/User/Assistant/Usuario/Asistente).
-        - Si falla, limpia el texto automáticamente.
-        - Devuelve la versión final validada o limpiada.
-        """
-        output_guard = Guard.for_string(
-            validators=[
-                RegexMatch(
-                    regex=r"^(?![\s\S]*```)(?![\s\S]*(?i)(system:|user:|assistant:|usuario:|asistente:))[\s\S]*$",
-                    on_fail=OnFailAction.EXCEPTION,
-                ),
-            ]
-        )
-
-        try:
-            validated = output_guard.parse(response)
-
-            # Manejar distintas versiones de Guardrails (v0.6.x)
-            if isinstance(validated, str):
-                validated_text = validated
-            elif hasattr(validated, "output"):
-                validated_text = validated.output
-            elif hasattr(validated, "validated_output"):
-                validated_text = validated.validated_output
-            elif hasattr(validated, "raw_output"):
-                validated_text = validated.raw_output
-            else:
-                validated_text = str(validated)
-
-            logging.info("[Guardrails] Respuesta validada correctamente.")
-            return validated_text.strip()
-
-        except Exception as e:
-            logging.warning(f"[Guardrails] Respuesta inválida. Se limpiará. Error: {e}")
-
-            import re
-            # Limpieza manual de texto sospechoso
-            cleaned = re.sub(r"```.*?```", " ", response, flags=re.S)  # elimina bloques markdown
-            cleaned = re.sub(r"(?i)\b(system:|user:|assistant:|usuario:|asistente:)\b", "", cleaned)
-            cleaned = re.sub(r"\s+", " ", cleaned).strip()  # elimina espacios extra
-
-            logging.info("[Guardrails] Texto limpiado automáticamente.")
-            return cleaned
 
     def run(self, state: Dict) -> Dict:
         self.current_agent.set(self.name)
@@ -98,8 +52,9 @@ class FinalResponseAgent(BaseAgent):
             "sql_result": df_result,
             "filters": state.get("fuzz_filter_out", "")
         })
-        # agregar validacion
-        response = self._validate_output(response)
+        
+        response = self.output_guard.validate(response)
+        
         state[f"{self.name}_out"] = response
 
         # --- Detectar canales mencionados por el usuario ---

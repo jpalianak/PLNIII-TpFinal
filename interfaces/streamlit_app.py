@@ -3,6 +3,7 @@ import time
 import streamlit as st
 from src.workflows.build_graph import build_main_graph
 from src.core.logging.logger_config import log_queue
+from src.core.guardrails.input_guard import InputGuard
 
 graph = build_main_graph()
 
@@ -48,6 +49,8 @@ def run_app():
     status_placeholder = st.empty()
     
     if run_button and user_query.strip():
+        input_guard = InputGuard()
+        validated_input = input_guard.validate(user_query)
         status_placeholder.info("⏳ Procesando...")
         all_logs = []
 
@@ -63,7 +66,7 @@ def run_app():
 
         start_time = time.time()
 
-        for chunk in graph.stream({"user_query": user_query}):
+        for chunk in graph.stream({"user_query": validated_input}):
 
             while not log_queue.empty():
                 msg = log_queue.get()

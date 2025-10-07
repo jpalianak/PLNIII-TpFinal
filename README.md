@@ -157,8 +157,27 @@ El agente final combina **el canal de notificación configurado por defecto en s
 
 ## 📜 Logs y pruebas
 
-* Los logs se almacenan en `logs/aige.log`.
+Los eventos del sistema se almacenan automáticamente en el archivo: `logs/aige.log`.
 
+Este archivo registra el flujo completo de interacción, incluyendo:
+
+- Consultas recibidas por el agente
+- Respuestas generadas
+- Uso de tokens por componente (prompt, completion, total)
+- Tiempos de ejecución (`elapsed`)
+- Cantidad de caracteres de entrada y salida
+- Validaciones realizadas por Guardrails
+
+Ejemplo de contenido del log
+
+```text
+Recibido: User: me das el id del mayor pedido?
+Devuelto: me das el id del mayor pedido?
+
+2025-10-06 23:37:32,936 - INFO - tokens - [router] prompt=376, completion=460, total=836 | elapsed=4.12s | in_chars=1727, out_chars=10
+2025-10-06 23:38:00,718 - INFO - tokens - [filter_check] prompt=943, completion=652, total=1595 | elapsed=4.51s | in_chars=4008, out_chars=6
+2025-10-06 23:38:30,495 - INFO - [Guardrails] Validación exitosa
+```
 ---
 
 ✍️ Autores: **Jonathan Cagua y Juan Pablo Alianak**

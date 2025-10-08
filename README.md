@@ -1,12 +1,26 @@
 # 🧠  Procesamiento Natural del Lenguaje – Sistema Multiagente con LLM
 
 Este proyecto implementa un sistema de agentes inteligentes que interactúan en lenguaje natural con una base de datos SQLite.
-Se utilizan LLMs, LangGraph, LangChain, y una arquitectura de agentes especializados que cooperan para responder consultas.
-Además, el sistema puede notificar resultados a través de múltiples canales: Email, Slack o Telegram.
+Utiliza LLMs, LangGraph, LangChain y Guardrails para garantizar coherencia y seguridad tanto en la entrada como en la salida de las consultas.
+La arquitectura se compone de agentes especializados que cooperan para interpretar, ejecutar y validar consultas de forma autónoma.
+Además, el sistema incluye un módulo de notificaciones multicanal, permitiendo enviar resultados por Email, Slack o Telegram.
 
 ---
 
 ## 📂 Estructura del proyecto
+
+- **`src/agents/`** → Agentes especializados por dominio (clientes, productos, pedidos, SQL, etc.).  
+- **`src/core/`** → Núcleo del sistema: base de datos, logs, validaciones (Guardrails) y utilidades comunes.  
+- **`src/knowledge/`** → Generador y almacenamiento de conocimiento contextual para los agentes.  
+- **`src/notifications/`** → Módulos de notificación por email, Slack y Telegram.  
+- **`src/workflows/`** → Orquestación de agentes mediante *LangGraph*.  
+- **`templates/`** → Prompts y configuraciones YAML generales y específicas por agente.  
+- **`config/`** → Parámetros del sistema, definición de agentes y estructura de tablas.  
+- **`data/`** → Base de datos local y scripts para generar datos de prueba.  
+- **`interfaces/`** → Interfaz web en Streamlit para consultas y control del sistema.  
+- **`logs/`** → Registros de ejecución y métricas del sistema.  
+- **`docs/`** → Diagramas y documentación técnica adicional.  
+
 
 ```
 .
@@ -152,6 +166,35 @@ streamlit run main_streamlit.py
 ## 🔄 Flujo de notificaciones
 
 El agente final combina **el canal de notificación configurado por defecto en system.yaml** con **los canales mencionados explícitamente por el usuario**: Email, Slack o Telegram. Si el usuario menciona un canal en su consulta, la notificación **se suma al canal configurado**. Los mensajes incluyen siempre una introducción automática del sistema de agentes.
+
+---
+
+## 🛡️ Validación y seguridad
+
+El sistema incorpora validaciones en dos niveles, implementadas con **Guardrails-AI** para asegurar interacciones seguras y estructuradas entre el usuario y los agentes:
+
+1. **Validación de entrada (input guardrails):**  
+   Antes de procesar la pregunta del usuario, el sistema valida su estructura, contenido y tipo.  
+   Esto previene inyecciones de prompt, entradas maliciosas o consultas fuera del contexto permitido.  
+   Esta capa se encuentra implementada tanto en:
+   - `main.py` (modo CLI / API)
+   - `main_streamlit.py` (modo interfaz visual)
+
+2. **Validación de salida (output guardrails):**  
+   Todas las respuestas generadas por los agentes pasan por un verificador de formato semántico.  
+   Esto garantiza que los resultados sean **interpretables, verificables y seguros** antes de mostrarse al usuario.
+
+
+#### Flujo de validación con Guardrails
+```mermaid
+graph TD
+A[Usuario ingresa consulta] --> B[Guardrails de entrada: validación sintáctica y semántica]
+B --> C[Router Agent selecciona el agente adecuado]
+C --> D[Agente ejecuta acción o consulta base de datos]
+D --> E[Guardrails de salida: formato y política]
+E --> F[Respuesta final al usuario o UI]
+```
+
 
 ---
 

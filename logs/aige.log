@@ -54,3 +54,12 @@ Devuelto: me das el id del mayor pedido?
 2025-10-06 23:53:29,680 - INFO - tokens - [query_validation] prompt=858, completion=2352, total=3210 | elapsed=11.68s | in_chars=3712, out_chars=142
 2025-10-06 23:53:33,618 - INFO - tokens - [final_response] prompt=179, completion=467, total=646 | elapsed=3.89s | in_chars=764, out_chars=35
 2025-10-06 23:53:33,658 - INFO - [Guardrails] Validación exitosa
+2025-10-08 23:57:35,471 - INFO - [Guardrails] Validación exitosa
+2025-10-08 23:57:39,315 - INFO - tokens - [router] prompt=377, completion=268, total=645 | elapsed=3.70s | in_chars=1728, out_chars=10
+2025-10-08 23:58:28,202 - INFO - tokens - [order[subquestion]] prompt=485, completion=858, total=1343 | elapsed=48.82s | in_chars=2129, out_chars=51
+2025-10-08 23:58:44,680 - INFO - tokens - [order[column_selection]] prompt=1798, completion=2559, total=4357 | elapsed=16.37s | in_chars=7704, out_chars=428
+2025-10-08 23:58:57,916 - INFO - tokens - [filter_check] prompt=817, completion=1292, total=2109 | elapsed=13.20s | in_chars=3495, out_chars=6
+2025-10-08 23:59:08,507 - INFO - tokens - [query_generation] prompt=854, completion=1138, total=1992 | elapsed=10.53s | in_chars=3747, out_chars=145
+2025-10-08 23:59:18,400 - INFO - tokens - [query_validation] prompt=774, completion=946, total=1720 | elapsed=9.82s | in_chars=3387, out_chars=145
+2025-10-08 23:59:21,944 - INFO - tokens - [final_response] prompt=180, completion=339, total=519 | elapsed=3.41s | in_chars=765, out_chars=33
+2025-10-08 23:59:21,979 - INFO - [Guardrails] Validación exitosa

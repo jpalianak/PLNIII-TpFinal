@@ -5,6 +5,8 @@ Utiliza LLMs, LangGraph, LangChain y Guardrails para garantizar coherencia y seg
 La arquitectura se compone de agentes especializados que cooperan para interpretar, ejecutar y validar consultas de forma autónoma.
 Además, el sistema incluye un módulo de notificaciones multicanal, permitiendo enviar resultados por Email, Slack o Telegram.
 
+![Diagrama general](docs/general.png)
+
 ---
 
 ## 📂 Estructura del proyecto
@@ -19,7 +21,7 @@ Además, el sistema incluye un módulo de notificaciones multicanal, permitiendo
 - **`data/`** → Base de datos local y scripts para generar datos de prueba.  
 - **`interfaces/`** → Interfaz web en Streamlit para consultas y control del sistema.  
 - **`logs/`** → Registros de ejecución y métricas del sistema.  
-- **`docs/`** → Diagramas y documentación técnica adicional.  
+- **`docs/`** → Diagramas y documentación técnica adicional(informe técnico).  
 
 
 ```
@@ -160,7 +162,7 @@ streamlit run main_streamlit.py
 ## 📖 Documentación
 
 * `docs/Diagram.drawio` → Diagrama de arquitectura.
-
+* `docs/Informe final.docx.pdf` → Informe Final.
 ---
 
 ## 🔄 Flujo de notificaciones

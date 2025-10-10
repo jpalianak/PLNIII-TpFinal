@@ -5,6 +5,7 @@ python-dotenv==1.1.1
 pandas==2.3.2
 PyYAML==6.0
 Faker==37.6.0
+numpy==2.3.2
 
 # LLM / Agentes
 langchain==0.3.27
@@ -19,4 +20,10 @@ langgraph==0.6.6
 SQLAlchemy==2.0.41
 
 # Otros útiles
+requests==2.32.4
+streamlit==1.47.0
+guardrails-ai==0.6.7
+guardrails-api-client==0.4.0
+pytelegrambotapi==4.29.1
+python-telegram-bot==20.3
 requests==2.32.4

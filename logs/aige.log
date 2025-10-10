@@ -63,3 +63,59 @@ Devuelto: me das el id del mayor pedido?
 2025-10-08 23:59:18,400 - INFO - tokens - [query_validation] prompt=774, completion=946, total=1720 | elapsed=9.82s | in_chars=3387, out_chars=145
 2025-10-08 23:59:21,944 - INFO - tokens - [final_response] prompt=180, completion=339, total=519 | elapsed=3.41s | in_chars=765, out_chars=33
 2025-10-08 23:59:21,979 - INFO - [Guardrails] Validación exitosa
+2025-10-09 18:49:17,817 - INFO - [Guardrails] Validación exitosa
+2025-10-09 18:49:22,463 - INFO - tokens - [router] prompt=378, completion=332, total=710 | elapsed=4.38s | in_chars=1730, out_chars=10
+2025-10-09 18:49:30,693 - INFO - tokens - [order[subquestion]] prompt=486, completion=794, total=1280 | elapsed=8.17s | in_chars=2131, out_chars=51
+2025-10-09 18:49:40,739 - INFO - tokens - [order[column_selection]] prompt=1800, completion=1960, total=3760 | elapsed=9.98s | in_chars=7708, out_chars=579
+2025-10-09 18:49:47,018 - INFO - tokens - [filter_check] prompt=857, completion=652, total=1509 | elapsed=6.18s | in_chars=3648, out_chars=6
+2025-10-09 18:49:55,243 - INFO - tokens - [query_generation] prompt=894, completion=1050, total=1944 | elapsed=8.14s | in_chars=3900, out_chars=60
+2025-10-09 18:50:04,667 - INFO - tokens - [query_validation] prompt=790, completion=1242, total=2032 | elapsed=9.32s | in_chars=3455, out_chars=60
+2025-10-09 18:50:10,178 - INFO - tokens - [final_response] prompt=183, completion=405, total=588 | elapsed=5.35s | in_chars=775, out_chars=46
+2025-10-09 18:50:10,328 - INFO - [Guardrails] Validación exitosa
+2025-10-09 19:48:42,602 - INFO - [Guardrails] Validación exitosa
+2025-10-09 19:48:48,600 - INFO - tokens - [router] prompt=381, completion=524, total=905 | elapsed=5.75s | in_chars=1740, out_chars=10
+2025-10-09 19:48:55,029 - INFO - tokens - [order[subquestion]] prompt=489, completion=670, total=1159 | elapsed=6.29s | in_chars=2141, out_chars=63
+2025-10-09 19:49:09,669 - INFO - tokens - [order[column_selection]] prompt=1810, completion=2692, total=4502 | elapsed=14.58s | in_chars=7740, out_chars=677
+2025-10-09 19:49:20,774 - INFO - tokens - [filter_check] prompt=897, completion=1180, total=2077 | elapsed=11.04s | in_chars=3780, out_chars=54
+2025-10-09 19:49:27,582 - INFO - tokens - [query_generation] prompt=936, completion=1055, total=1991 | elapsed=6.78s | in_chars=4034, out_chars=80
+2025-10-09 19:49:33,293 - INFO - tokens - [query_validation] prompt=837, completion=732, total=1569 | elapsed=5.67s | in_chars=3609, out_chars=69
+2025-10-09 19:49:37,062 - INFO - tokens - [final_response] prompt=185, completion=343, total=528 | elapsed=3.67s | in_chars=781, out_chars=45
+2025-10-09 19:49:37,099 - INFO - [Guardrails] Validación exitosa
+2025-10-09 22:09:57,844 - INFO - [Guardrails] Activado: input/output corregido
+Recibido: User:me das el id del mayor pedido?
+Devuelto: me das el id del mayor pedido?
+2025-10-09 22:10:02,987 - INFO - tokens - [router] prompt=757, completion=856, total=1613 | elapsed=4.81s | in_chars=3467, out_chars=20
+2025-10-09 22:12:08,039 - INFO - [Guardrails] Activado: input/output corregido
+Recibido: User:me das el id del mayor pedido?
+Devuelto: me das el id del mayor pedido?
+2025-10-09 22:12:10,913 - INFO - tokens - [router] prompt=1133, completion=1124, total=2257 | elapsed=2.86s | in_chars=5194, out_chars=30
+2025-10-09 22:12:27,212 - INFO - tokens - [order[subquestion]] prompt=2294, completion=4470, total=6764 | elapsed=16.22s | in_chars=11996, out_chars=832
+2025-10-09 22:12:41,470 - INFO - tokens - [order[column_selection]] prompt=3762, completion=6316, total=10078 | elapsed=13.71s | in_chars=18191, out_chars=1517
+2025-10-09 22:12:50,665 - INFO - tokens - [filter_check] prompt=1801, completion=2152, total=3953 | elapsed=9.13s | in_chars=7608, out_chars=60
+2025-10-09 22:13:12,366 - INFO - tokens - [query_generation] prompt=1877, completion=4101, total=5978 | elapsed=21.66s | in_chars=8114, out_chars=395
+2025-10-09 22:13:25,356 - INFO - tokens - [query_validation] prompt=1749, completion=2626, total=4375 | elapsed=12.86s | in_chars=7499, out_chars=384
+2025-10-09 22:13:29,000 - INFO - tokens - [final_response] prompt=364, completion=682, total=1046 | elapsed=3.55s | in_chars=1545, out_chars=78
+2025-10-09 22:13:29,019 - INFO - [Guardrails] Validación exitosa
+2025-10-09 22:15:59,813 - INFO - [Guardrails] Activado: input/output corregido
+Recibido: User:me das el id del mayor pedido?
+Devuelto: me das el id del mayor pedido?
+2025-10-09 22:16:02,378 - INFO - tokens - [router] prompt=1509, completion=1584, total=3093 | elapsed=2.55s | in_chars=6921, out_chars=40
+2025-10-09 22:16:09,720 - INFO - tokens - [order[subquestion]] prompt=4246, completion=7692, total=11938 | elapsed=7.31s | in_chars=20319, out_chars=1595
+2025-10-09 22:16:21,605 - INFO - tokens - [order[column_selection]] prompt=5696, completion=9884, total=15580 | elapsed=11.84s | in_chars=26437, out_chars=2368
+2025-10-09 22:16:29,245 - INFO - tokens - [filter_check] prompt=2523, completion=3189, total=5712 | elapsed=7.62s | in_chars=10722, out_chars=66
+2025-10-09 22:16:42,279 - INFO - tokens - [query_generation] prompt=2637, completion=6303, total=8940 | elapsed=13.01s | in_chars=11480, out_chars=450
+2025-10-09 22:16:54,232 - INFO - tokens - [query_validation] prompt=2405, completion=4444, total=6849 | elapsed=11.92s | in_chars=10415, out_chars=439
+2025-10-09 22:16:56,904 - INFO - tokens - [final_response] prompt=545, completion=957, total=1502 | elapsed=2.65s | in_chars=2317, out_chars=113
+2025-10-09 22:16:56,941 - INFO - [Guardrails] Validación exitosa
+2025-10-09 22:18:08,384 - INFO - [Guardrails] Validación exitosa
+2025-10-09 22:18:14,076 - INFO - tokens - [router] prompt=1891, completion=2753, total=4644 | elapsed=5.68s | in_chars=8682, out_chars=62
+2025-10-09 22:18:19,712 - INFO - tokens - [customer[subquestion]] prompt=390, completion=906, total=1296 | elapsed=5.52s | in_chars=1786, out_chars=2
+2025-10-09 22:18:19,719 - ERROR - customer Error parseando salida: None | malformed node or string: None
+2025-10-09 22:18:30,322 - INFO - tokens - [order[subquestion]] prompt=6186, completion=12314, total=18500 | elapsed=16.18s | in_chars=28599, out_chars=2572
+2025-10-09 22:18:44,409 - INFO - tokens - [order[column_selection]] prompt=7652, completion=14813, total=22465 | elapsed=14.04s | in_chars=34795, out_chars=3295
+2025-10-09 22:19:02,323 - INFO - tokens - [order[column_selection]] prompt=8975, completion=17489, total=26464 | elapsed=17.87s | in_chars=40436, out_chars=4376
+2025-10-09 22:19:08,577 - INFO - tokens - [filter_check] prompt=3705, completion=4161, total=7866 | elapsed=6.24s | in_chars=15775, out_chars=72
+2025-10-09 22:19:34,770 - INFO - tokens - [query_generation] prompt=3856, completion=10979, total=14835 | elapsed=26.16s | in_chars=16785, out_chars=1051
+2025-10-09 22:19:55,353 - INFO - tokens - [query_validation] prompt=3690, completion=8189, total=11879 | elapsed=20.54s | in_chars=15816, out_chars=921
+2025-10-09 22:20:01,992 - INFO - tokens - [final_response] prompt=745, completion=2042, total=2787 | elapsed=6.26s | in_chars=3163, out_chars=849
+2025-10-09 22:20:01,999 - INFO - [Guardrails] Validación exitosa

@@ -162,7 +162,8 @@ streamlit run main_streamlit.py
 ## 📖 Documentación
 
 * `docs/Diagram.drawio` → Diagrama de arquitectura.
-* `docs/Informe final.docx.pdf` → Informe Final.
+* `docs/Informe final.pdf` → Informe Final.
+* `docs/Demostracion Streamlit.mp4` → Video demostrativo.
 ---
 
 ## 🔄 Flujo de notificaciones
